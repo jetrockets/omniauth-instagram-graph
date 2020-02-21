@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'omniauth/strategies/oauth2'
 require 'omniauth/instagram-graph/long_lived_token'
 require 'omniauth/instagram-graph/long_lived_client'
@@ -17,8 +19,8 @@ module OmniAuth
 
       option :client_options, {
         site: 'https://api.instagram.com',
-        authorize_url: "https://api.instagram.com/oauth/authorize",
-        token_url: 'oauth/access_token'
+        authorize_url: 'https://api.instagram.com/oauth/authorize',
+        token_url: 'oauth/access_token',
       }
 
       option :exchange_access_token_to_long_lived, true
@@ -46,9 +48,9 @@ module OmniAuth
 
       def info_options
         params = {}
-        params.merge!({fields: (options[:info_fields] || 'account_type,id,media_count,username')})
+        params[:fields] = (options[:info_fields] || 'account_type,id,media_count,username')
 
-        { params: params }
+        {params: params}
       end
 
       def callback_url
@@ -69,12 +71,17 @@ module OmniAuth
         end
       end
 
-      def callback_phase # rubocop:disable AbcSize, CyclomaticComplexity, MethodLength, PerceivedComplexity
-        error = request.params["error_reason"] || request.params["error"]
+      def callback_phase
+        error = request.params['error_reason'] || request.params['error']
         if error
-          fail!(error, CallbackError.new(request.params["error"], request.params["error_description"] || request.params["error_reason"], request.params["error_uri"]))
-        elsif !options.provider_ignores_state && (request.params["state"].to_s.empty? || request.params["state"] != session.delete("omniauth.state"))
-          fail!(:csrf_detected, CallbackError.new(:csrf_detected, "CSRF detected"))
+          fail!(error,
+            CallbackError.new(
+              request.params['error'],
+              request.params['error_description'] || request.params['error_reason'],
+              request.params['error_uri']
+            ))
+        elsif !options.provider_ignores_state && (request.params['state'].to_s.empty? || request.params['state'] != session.delete('omniauth.state'))
+          fail!(:csrf_detected, CallbackError.new(:csrf_detected, 'CSRF detected'))
         else
           self.access_token = build_access_token
 
@@ -91,7 +98,6 @@ module OmniAuth
       rescue ::SocketError => e
         fail!(:failed_to_connect, e)
       end
-
 
       private
 

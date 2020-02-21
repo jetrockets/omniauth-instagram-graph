@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 
 require 'bundler/setup'
 require 'minitest/autorun'
@@ -8,7 +9,7 @@ OmniAuth.config.test_mode = true
 
 module BlockTestHelper
   def test(name, &blk)
-    method_name = "test_#{name.gsub(/\s+/, '_')}"
+    method_name = "test_#{name.gsub(/\s+/, "_")}"
     raise "Method already defined: #{method_name}" if instance_methods.include?(method_name.to_sym)
     define_method method_name, &blk
   end
@@ -17,12 +18,12 @@ end
 module CustomAssertions
   def assert_has_key(key, hash, msg = nil)
     msg = message(msg) { "Expected #{hash.inspect} to have key #{key.inspect}" }
-    assert hash.has_key?(key), msg
+    assert hash.key?(key), msg
   end
 
   def refute_has_key(key, hash, msg = nil)
     msg = message(msg) { "Expected #{hash.inspect} not to have key #{key.inspect}" }
-    refute hash.has_key?(key), msg
+    refute hash.key?(key), msg
   end
 end
 

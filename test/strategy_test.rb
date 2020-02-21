@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'helper'
 require 'omniauth-instagram-graph'
 require 'openssl'

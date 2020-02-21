@@ -1,20 +1,21 @@
+# frozen_string_literal: true
+
 module Omniauth
   module InstagramGraph
-  	class LongLivedToken < OAuth2::AccessToken
-  		TOKEN_REFRESH_PATH = '/refresh_access_token'
+    class LongLivedToken < OAuth2::AccessToken
+      TOKEN_REFRESH_PATH = '/refresh_access_token'
 
+      def refresh(params = {})
+        options = {
+          token_url: TOKEN_REFRESH_PATH,
+        }
+        refresh_client = Omniauth::InstagramGraph::LongLivedClient.new(client.id, client.secret, options)
 
-	    def refresh(params = {})
-	    	options = {
-	    		token_url: TOKEN_REFRESH_PATH
-	    	}
-	    	refresh_client = Omniauth::InstagramGraph::LongLivedClient.new(client.id, client.secret, options)
+        params[:grant_type] = 'ig_refresh_token'
+        params[:access_token] = token
 
-	      params[:grant_type] = 'ig_refresh_token'
-	      params[:access_token] = token
-
-	      refresh_client.get_token(params)
-	    end
-  	end
+        refresh_client.get_token(params)
+      end
+    end
   end
 end

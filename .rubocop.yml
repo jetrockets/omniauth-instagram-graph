@@ -1,0 +1,2 @@
+inherit_gem:
+  jetrockets-standard: config/gems.yml
