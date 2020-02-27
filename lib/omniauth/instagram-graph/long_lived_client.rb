@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module Omniauth
+module OmniAuth
   module InstagramGraph
     class LongLivedClient < OAuth2::Client
       TOKEN_URL = '/access_token'

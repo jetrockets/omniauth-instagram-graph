@@ -86,7 +86,7 @@ module OmniAuth
       private
 
       def long_lived_client
-        Omniauth::InstagramGraph::LongLivedClient.new(client.id, client.secret)
+        OmniAuth::InstagramGraph::LongLivedClient.new(client.id, client.secret)
       end
 
       def prune!(hash)
