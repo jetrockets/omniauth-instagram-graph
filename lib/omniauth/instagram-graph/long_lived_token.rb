@@ -5,7 +5,7 @@ module Omniauth
     class LongLivedToken < OAuth2::AccessToken
       TOKEN_REFRESH_PATH = '/refresh_access_token'
 
-      def refresh(params = {})
+      def refresh!(params = {})
         options = {
           token_url: TOKEN_REFRESH_PATH,
         }
