@@ -4,7 +4,7 @@ require_relative 'lib/omniauth/instagram-graph/version'
 
 Gem::Specification.new do |spec|
   spec.name = 'omniauth-instagram-graph'
-  spec.version = Omniauth::InstagramGraph::VERSION
+  spec.version = OmniAuth::InstagramGraph::VERSION
   spec.authors = ['Igor Alexandrov']
   spec.email = ['igor.alexandrov@gmail.com']
 
