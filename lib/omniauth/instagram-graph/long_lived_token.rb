@@ -2,7 +2,7 @@
 
 module OmniAuth
   module InstagramGraph
-    class LongLivedToken < OAuth2::AccessToken
+    class LongLivedToken < ::OAuth2::AccessToken
       TOKEN_REFRESH_PATH = '/refresh_access_token'
 
       def refresh!(params = {})
