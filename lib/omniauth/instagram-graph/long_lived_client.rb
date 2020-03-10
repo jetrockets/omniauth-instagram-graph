@@ -2,7 +2,7 @@
 
 module OmniAuth
   module InstagramGraph
-    class LongLivedClient < OAuth2::Client
+    class LongLivedClient < ::OAuth2::Client
       TOKEN_URL = '/access_token'
 
       def initialize(client_id, client_secret, options = {})
