@@ -62,7 +62,7 @@ Here's an example Auth Hash available in `request.env['omniauth.auth']`:
       account_type: 'PERSONAL',
       id: '17841400519842852',
       media_count: 211,
-      username: "igor_alexandrov"     
+      username: "igor_alexandrov"
     }
   }
 }
@@ -77,6 +77,12 @@ Long-Lived Tokens are valid for 60 days. To be able to use token after, you need
 client = OmniAuth::InstagramGraph::LongLivedClient.new(ENV['INSTAGRAM_APP_ID'], ENV['INSTAGRAM_APP_SECRET'])
 token = client.get_token(access_token: "<CURRENT LONG-LIVED TOKEN>")
 refreshed = token.refresh
+```
+
+## Development
+
+```
+gem bump --file=lib/omniauth/instagram-graph/version.rb --push --tag --release --pretend
 ```
 
 ## License
