@@ -76,7 +76,7 @@ Long-Lived Tokens are valid for 60 days. To be able to use token after, you need
 ``` ruby
 client = OmniAuth::InstagramGraph::LongLivedClient.new(ENV['INSTAGRAM_APP_ID'], ENV['INSTAGRAM_APP_SECRET'])
 token = client.get_token(access_token: "<CURRENT LONG-LIVED TOKEN>")
-refreshed = token.refresh
+refreshed = token.refresh!
 ```
 
 ## Development
